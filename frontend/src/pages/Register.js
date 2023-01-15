@@ -4,7 +4,7 @@ import axiosApi from "../apis/axios";
 import MDSpinner from "react-md-spinner";
 import Swal from "sweetalert2";
 
-export default function Login() {
+export default function Register() {
   const navigate = useNavigate();
   const [Input, setInput] = useState({
     email: "",
@@ -55,7 +55,7 @@ export default function Login() {
                 <form method="post" onSubmit={handleSubmit}>
                   <div class="form-floating mb-3">
                     <input
-                      type="email"
+                      type="text"
                       class="form-control"
                       id="floatingInput"
                       placeholder="name"

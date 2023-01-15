@@ -5,7 +5,9 @@ class Controller {
   static async registerUser(req, res) {
     try {
       const { email, password, name } = req.body;
-
+      if (!email || !password || !name) {
+        throw { name: "FIELD_UNCOMPLETE" };
+      }
       const data = await User.create({ email, password, name });
       res.status(201).json({
         id: data.id,
@@ -13,6 +15,11 @@ class Controller {
       });
     } catch (error) {
       console.log(error);
+      if (error.name === "FIELD_UNCOMPLETE") {
+        res.status(402).json("Please Fill All Field!");
+      } else {
+        res.status(500).json(error);
+      }
     }
   }
 

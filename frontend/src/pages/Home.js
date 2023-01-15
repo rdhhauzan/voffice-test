@@ -5,6 +5,11 @@ import axiosApi from "../apis/axios";
 import MDSpinner from "react-md-spinner";
 
 export default function Home() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/client");
+  }, []);
   return (
     <>
       <Navbar />
