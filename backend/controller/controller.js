@@ -222,8 +222,7 @@ class Controller {
   }
 
   static async addRoomUsage(req, res) {
-    const { roomId } = req.params;
-    const { startTime, endTime, quotaUsed, id } = req.body;
+    const { startTime, endTime, quotaUsed, id, roomId } = req.body;
     try {
       await RoomUsage.create({
         clientId: id,
@@ -261,12 +260,12 @@ class Controller {
 
   static async deleteRoomUsage(req, res) {
     const { roomId } = req.params;
-    const { id } = req.user;
+    const { clientId } = req.body;
 
     try {
       await RoomUsage.destroy({
         where: {
-          clientId: id,
+          clientId: clientId,
           roomId: roomId,
         },
       });

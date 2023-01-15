@@ -26,6 +26,47 @@ export default function ShowRoomUsage() {
       });
   }, []);
 
+  function convertDate(date) {
+    return new Intl.DateTimeFormat("en-GB", {
+      dateStyle: "full",
+      timeStyle: "short",
+      timeZone: "Asia/Jakarta",
+    }).format(date);
+  }
+
+  function deleteRoomUsage(roomId, clientId) {
+    console.log(roomId, clientId);
+    axiosApi
+      .delete(`/roomUsage/delete/${roomId}`, {
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+        data: {
+          clientId: clientId,
+        },
+      })
+      .then(() => {
+        Swal.fire({
+          title: "Success!",
+          icon: "success",
+          text: "Delete Success!",
+        });
+
+        axiosApi
+          .get("/roomUsages", {
+            headers: {
+              access_token: localStorage.getItem("access_token"),
+            },
+          })
+          .then((data) => {
+            setData(data.data);
+          })
+          .finally(() => {
+            setIsLoading(false);
+          });
+      });
+  }
+
   if (isLoading) {
     return <MDSpinner />;
   }
@@ -33,7 +74,55 @@ export default function ShowRoomUsage() {
     <>
       <Navbar />
       {console.log(Data)}
+      <a
+        class="btn btn-primary mt-3"
+        href="#"
+        role="button"
+        onClick={() => navigate("/RoomUsage/add")}
+      >
+        Add Room Usage
+      </a>
       <h1>Room Usage : </h1>
+
+      <table class="table table-bordered table-hover mt-4">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Room name</th>
+            <th scope="col">Client name</th>
+            <th scope="col">Booking Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Quota Used</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        {Data.map((el, idx) => {
+          return (
+            <tbody key={el.id}>
+              <tr>
+                <td>{idx + 1}</td>
+                <td>{el?.Room?.roomName}</td>
+                <td>{el?.Client?.name}</td>
+                <td>{convertDate(el?.bookingTime)}</td>
+                <td>
+                  {el?.startTime} - {el?.endTime}
+                </td>
+                <td>{el?.quotaUsed}</td>
+                <td>
+                  <a
+                    class="btn btn-danger"
+                    href="#"
+                    role="button"
+                    onClick={() => deleteRoomUsage(el?.roomId, el?.clientId)}
+                  >
+                    Delete Room Usage
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          );
+        })}
+      </table>
     </>
   );
 }

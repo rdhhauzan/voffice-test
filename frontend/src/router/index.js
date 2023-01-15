@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { redirect } from "react-router-dom";
 import AddBalance from "../pages/AddBalance";
 import AddRoom from "../pages/AddRoom";
+import AddRoomUsage from "../pages/AddRoomUsage";
 import EditRoom from "../pages/EditRoom";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
@@ -87,6 +88,15 @@ const router = createBrowserRouter([
   {
     path: "/RoomUsage",
     element: <ShowRoomUsage />,
+    // loader: async () => {
+    //   if (!localStorage.getItem("access_token")) {
+    //     return redirect("/login");
+    //   }
+    // },
+  },
+  {
+    path: "/RoomUsage/add",
+    element: <AddRoomUsage />,
     // loader: async () => {
     //   if (!localStorage.getItem("access_token")) {
     //     return redirect("/login");

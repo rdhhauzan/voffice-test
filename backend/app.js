@@ -29,7 +29,7 @@ app.put("/room/edit/:id", Controller.updateRoom);
 app.delete("/room/delete/:id", Controller.deleteRoom);
 app.get("/room/:id", Controller.getRoom);
 
-app.post("/roomUsage/add/:roomId", Controller.addRoomUsage);
+app.post("/roomUsage/add", Controller.addRoomUsage);
 app.get("/roomUsages", Controller.getRoomUsages);
 app.delete("/roomUsage/delete/:roomId", Controller.deleteRoomUsage);
 
