@@ -123,7 +123,6 @@ class Controller {
 
   static async getClient(req, res) {
     const { id } = req.params;
-
     try {
       let data = await Client.findOne({
         where: { id: id },
@@ -210,6 +209,36 @@ class Controller {
       await Room.destroy({ where: { id: id } });
 
       res.status(200).json(`Delete Room Successfully!`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async addRoomUsage(req, res) {
+    const { roomId } = req.params;
+    const { id } = req.user;
+    const { startTime, endTime, quotaUsed } = req.body;
+    try {
+      let data = RoomUsage.create({
+        clientId: id,
+        roomId: roomId,
+        startTime,
+        endTime,
+        bookingDate: new Date(),
+        quotaUsed,
+      });
+
+      res.status(200).json(`Success Add Room Usage!`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async getRoomUsages(req, res) {
+    try {
+      let data = await RoomUsage.findAll();
+
+      res.status(200).json(data);
     } catch (error) {
       console.log(error);
     }
