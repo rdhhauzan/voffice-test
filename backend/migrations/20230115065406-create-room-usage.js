@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      ClientId: {
+      clientId: {
         type: Sequelize.INTEGER,
         references: {
           model: "Clients",
@@ -18,7 +18,7 @@ module.exports = {
         onUpdate: "cascade",
         onDelete: "cascade",
       },
-      RoomId: {
+      roomId: {
         type: Sequelize.INTEGER,
         references: {
           model: "Rooms",

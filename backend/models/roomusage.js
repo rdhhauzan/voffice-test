@@ -9,19 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      RoomUsage.hasMany(models.Client, {
-        foreignKey: "ClientId",
-      });
-
-      RoomUsage.hasMany(models.Room, {
-        foreignKey: "RoomId",
-      });
     }
   }
   RoomUsage.init(
     {
-      ClientId: DataTypes.INTEGER,
-      RoomId: DataTypes.INTEGER,
+      clientId: DataTypes.INTEGER,
+      roomId: DataTypes.INTEGER,
       startTime: DataTypes.STRING,
       endTime: DataTypes.STRING,
       bookingDate: DataTypes.DATE,
