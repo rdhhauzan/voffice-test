@@ -223,10 +223,9 @@ class Controller {
 
   static async addRoomUsage(req, res) {
     const { roomId } = req.params;
-    const { id } = req.user;
-    const { startTime, endTime, quotaUsed } = req.body;
+    const { startTime, endTime, quotaUsed, id } = req.body;
     try {
-      let data = RoomUsage.create({
+      await RoomUsage.create({
         clientId: id,
         roomId: roomId,
         startTime,
@@ -243,7 +242,16 @@ class Controller {
 
   static async getRoomUsages(req, res) {
     try {
-      let data = await RoomUsage.findAll();
+      let data = await RoomUsage.findAll({
+        include: [
+          {
+            model: Room,
+          },
+          {
+            model: Client,
+          },
+        ],
+      });
 
       res.status(200).json(data);
     } catch (error) {

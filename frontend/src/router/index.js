@@ -8,6 +8,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ShowClient from "../pages/ShowClient";
 import ShowRoom from "../pages/ShowRoom";
+import ShowRoomUsage from "../pages/ShowRoomUsage";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,15 @@ const router = createBrowserRouter([
   {
     path: "/room/edit/:id",
     element: <EditRoom />,
+    // loader: async () => {
+    //   if (!localStorage.getItem("access_token")) {
+    //     return redirect("/login");
+    //   }
+    // },
+  },
+  {
+    path: "/RoomUsage",
+    element: <ShowRoomUsage />,
     // loader: async () => {
     //   if (!localStorage.getItem("access_token")) {
     //     return redirect("/login");
