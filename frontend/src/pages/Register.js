@@ -98,6 +98,14 @@ export default function Register() {
                     </button>
                   </div>
                 </form>
+                <a
+                  class="btn btn-primary mt-3 d-flex justify-content-center"
+                  href="#"
+                  role="button"
+                  onClick={() => navigate("/login")}
+                >
+                  Login
+                </a>
               </div>
             </div>
           </div>

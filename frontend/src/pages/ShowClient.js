@@ -36,6 +36,14 @@ export default function ShowClient() {
   return (
     <>
       <Navbar />
+      <a
+        class="btn btn-primary mt-3"
+        href="#"
+        role="button"
+        onClick={() => navigate("/client/add")}
+      >
+        Add Client
+      </a>
       <h1 className="mt-3">Client List : </h1>
       <table class="table table-bordered table-hover mt-4">
         <thead>
@@ -65,9 +73,6 @@ export default function ShowClient() {
                     onClick={() => toAddBalance(el?.id)}
                   >
                     Add Credit
-                  </a>
-                  <a class="btn btn-primary mx-3" href="#" role="button">
-                    Show Detail
                   </a>
                 </td>
               </tr>

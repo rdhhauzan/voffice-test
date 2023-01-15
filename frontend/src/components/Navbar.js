@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const navigate = useNavigate();
+
+  function logout() {
+    localStorage.clear();
+    navigate("/login");
+  }
   return (
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
@@ -34,10 +39,10 @@ export default function Navbar() {
                 aria-current="page"
                 href="#"
                 onClick={() => {
-                  navigate("/");
+                  navigate("/client");
                 }}
               >
-                Home
+                Client
               </a>
             </li>
             <li class="nav-item">
@@ -46,10 +51,10 @@ export default function Navbar() {
                 aria-current="page"
                 href="#"
                 onClick={() => {
-                  navigate("/upload");
+                  navigate("/room");
                 }}
               >
-                Upload CSV
+                Room
               </a>
             </li>
             <li class="nav-item">
@@ -58,10 +63,20 @@ export default function Navbar() {
                 aria-current="page"
                 href="#"
                 onClick={() => {
-                  navigate("/type");
+                  navigate("/RoomUsage");
                 }}
               >
-                Ticket Type List
+                Room Usage
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="#"
+                onClick={() => logout()}
+              >
+                Logout
               </a>
             </li>
           </ul>

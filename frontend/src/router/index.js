@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { redirect } from "react-router-dom";
 import AddBalance from "../pages/AddBalance";
+import AddClient from "../pages/AddClient";
 import AddRoom from "../pages/AddRoom";
 import AddRoomUsage from "../pages/AddRoomUsage";
 import EditRoom from "../pages/EditRoom";
@@ -15,11 +16,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
-    // loader: async () => {
-    //   if (!localStorage.getItem("access_token")) {
-    //     return redirect("/login");
-    //   }
-    // },
+    loader: async () => {
+      if (!localStorage.getItem("access_token")) {
+        return redirect("/login");
+      }
+    },
   },
   {
     path: "/login",
@@ -42,66 +43,75 @@ const router = createBrowserRouter([
   {
     path: "/client",
     element: <ShowClient />,
-    // loader: async () => {
-    //   if (!localStorage.getItem("access_token")) {
-    //     return redirect("/login");
-    //   }
-    // },
+    loader: async () => {
+      if (!localStorage.getItem("access_token")) {
+        return redirect("/login");
+      }
+    },
   },
   {
     path: "/client/addBalance/:id",
     element: <AddBalance />,
-    // loader: async () => {
-    //   if (!localStorage.getItem("access_token")) {
-    //     return redirect("/login");
-    //   }
-    // },
+    loader: async () => {
+      if (!localStorage.getItem("access_token")) {
+        return redirect("/login");
+      }
+    },
   },
 
   {
     path: "/room",
     element: <ShowRoom />,
-    // loader: async () => {
-    //   if (!localStorage.getItem("access_token")) {
-    //     return redirect("/login");
-    //   }
-    // },
+    loader: async () => {
+      if (!localStorage.getItem("access_token")) {
+        return redirect("/login");
+      }
+    },
   },
   {
     path: "/room/add",
     element: <AddRoom />,
-    // loader: async () => {
-    //   if (!localStorage.getItem("access_token")) {
-    //     return redirect("/login");
-    //   }
-    // },
+    loader: async () => {
+      if (!localStorage.getItem("access_token")) {
+        return redirect("/login");
+      }
+    },
   },
   {
     path: "/room/edit/:id",
     element: <EditRoom />,
-    // loader: async () => {
-    //   if (!localStorage.getItem("access_token")) {
-    //     return redirect("/login");
-    //   }
-    // },
+    loader: async () => {
+      if (!localStorage.getItem("access_token")) {
+        return redirect("/login");
+      }
+    },
   },
   {
     path: "/RoomUsage",
     element: <ShowRoomUsage />,
-    // loader: async () => {
-    //   if (!localStorage.getItem("access_token")) {
-    //     return redirect("/login");
-    //   }
-    // },
+    loader: async () => {
+      if (!localStorage.getItem("access_token")) {
+        return redirect("/login");
+      }
+    },
   },
   {
     path: "/RoomUsage/add",
     element: <AddRoomUsage />,
-    // loader: async () => {
-    //   if (!localStorage.getItem("access_token")) {
-    //     return redirect("/login");
-    //   }
-    // },
+    loader: async () => {
+      if (!localStorage.getItem("access_token")) {
+        return redirect("/login");
+      }
+    },
+  },
+  {
+    path: "/client/add",
+    element: <AddClient />,
+    loader: async () => {
+      if (!localStorage.getItem("access_token")) {
+        return redirect("/login");
+      }
+    },
   },
 ]);
 
