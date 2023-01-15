@@ -4,8 +4,10 @@ import axiosApi from "../apis/axios";
 import MDSpinner from "react-md-spinner";
 import Swal from "sweetalert2";
 import Navbar from "../components/Navbar";
+import { useParams } from "react-router-dom";
 
-export default function AddRoom() {
+export default function EditRoom() {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [Input, setInput] = useState({
     roomName: "",
@@ -15,7 +17,7 @@ export default function AddRoom() {
   function handleSubmit(event) {
     event.preventDefault();
     axiosApi
-      .post(`/room/add`, Input, {
+      .put(`/room/edit/${id}`, Input, {
         headers: {
           access_token: localStorage.getItem("access_token"),
         },
@@ -24,7 +26,7 @@ export default function AddRoom() {
         Swal.fire({
           title: "Success!",
           icon: "success",
-          text: "Room Add Successfully!",
+          text: "Edit Add Successfully!",
         });
         navigate("/room");
       })
@@ -46,11 +48,23 @@ export default function AddRoom() {
     });
   }
 
+  useEffect(() => {
+    axiosApi
+      .get(`/room/${id}`, {
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      })
+      .then((data) => {
+        setInput(data.data);
+      });
+    console.log(Input);
+  }, [id]);
   return (
     <>
       <Navbar />
 
-      <h1>Add Room</h1>
+      <h1>Edit Room</h1>
 
       <form method="post" onSubmit={handleSubmit}>
         <div class="form-floating mb-3">

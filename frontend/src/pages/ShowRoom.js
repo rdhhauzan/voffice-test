@@ -23,11 +23,30 @@ export default function ShowRoom() {
           icon: "success",
           text: "Delete Success!",
         });
+
+        setIsLoading(true);
+        axiosApi
+          .get("/rooms", {
+            headers: {
+              access_token: localStorage.getItem("access_token"),
+            },
+          })
+          .then((data) => {
+            setRoom(data.data);
+            console.log(data.data);
+          })
+          .finally(() => {
+            setIsLoading(false);
+          });
       });
   }
 
   function toAddRoom() {
     navigate("/room/add");
+  }
+
+  function toEditRoom(id) {
+    navigate(`/room/edit/${id}`);
   }
 
   useEffect(() => {
@@ -85,11 +104,16 @@ export default function ShowRoom() {
                     class="btn btn-primary"
                     href="#"
                     role="button"
-                    onClick={() => deleteRoom(el?.id)}
+                    onClick={() => toEditRoom(el?.id)}
                   >
                     Edit Room
                   </a>
-                  <a class="btn btn-danger mx-3" href="#" role="button">
+                  <a
+                    class="btn btn-danger mx-3"
+                    href="#"
+                    role="button"
+                    onClick={() => deleteRoom(el?.id)}
+                  >
                     Delete Room
                   </a>
                 </td>
