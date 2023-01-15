@@ -159,6 +159,61 @@ class Controller {
       }
     }
   }
+
+  static async getRooms(req, res) {
+    try {
+      let data = await Room.findAll();
+
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async updateRoom(req, res) {
+    const { id } = req.params;
+    const { roomName, costPerHour } = req.body;
+    try {
+      let findRoom = await Room.findOne({ where: { id: id } });
+
+      if (!findRoom) {
+        throw { name: "ROOM_NOT_FOUND" };
+      }
+
+      await Room.update({ roomName, costPerHour }, { where: { id: id } });
+
+      res.status(200).json(`Success Update Room With ID ${id}`);
+    } catch (error) {
+      console.log(error);
+      if (error.name == "ROOM_NOT_FOUND") {
+        res.status(402).json("Room Not Found");
+      }
+    }
+  }
+
+  static async getRoom(req, res) {
+    const { id } = req.params;
+
+    try {
+      let data = await Room.findOne({ where: { id: id } });
+
+      res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async deleteRoom(req, res) {
+    const { id } = req.params;
+
+    try {
+      await Room.destroy({ where: { id: id } });
+
+      res.status(200).json(`Delete Room Successfully!`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 module.exports = Controller;

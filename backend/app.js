@@ -20,10 +20,15 @@ app.use(loginAuth);
 
 app.post("/client/add", Controller.addClient);
 app.post("/client/addBalance/:id", Controller.addClientCredit);
-app.get("/client/", Controller.getClients);
+app.get("/clients/", Controller.getClients);
 app.get("/client/:id", Controller.getClient);
 
-app.post("/room/add", Controller.addRoom)
+app.get("/rooms", Controller.getRooms);
+app.post("/room/add", Controller.addRoom);
+app.put("/room/edit/:id", Controller.updateRoom);
+app.delete("/room/delete/:id", Controller.deleteRoom);
+app.get("/room/:id", Controller.getRoom);
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
