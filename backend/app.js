@@ -31,6 +31,7 @@ app.get("/room/:id", Controller.getRoom);
 
 app.post("/roomUsage/add/:roomId", Controller.addRoomUsage);
 app.get("/roomUsages", Controller.getRoomUsages);
+app.delete("/roomUsage/delete/:roomId", Controller.deleteRoomUsage);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

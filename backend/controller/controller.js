@@ -243,6 +243,24 @@ class Controller {
       console.log(error);
     }
   }
+
+  static async deleteRoomUsage(req, res) {
+    const { roomId } = req.params;
+    const { id } = req.user;
+
+    try {
+      await RoomUsage.destroy({
+        where: {
+          clientId: id,
+          roomId: roomId,
+        },
+      });
+
+      res.status(200).json(`Room Usage Delete Successfully!`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 module.exports = Controller;
